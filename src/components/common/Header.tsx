@@ -6,8 +6,19 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 
 import Left from "./Left";
+import "./Header.css";
 
 export default function Response(props: any) {
+  const [open, setOpen] = React.useState(true);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -82,9 +93,17 @@ export default function Response(props: any) {
         <div style={{ lineHeight: "61px", paddingLeft: "10px" }}>ICD PoC</div>
       </AppBar>
       <Box>
-        <Left />
+        <Left
+          open={open}
+          handleDrawerOpen={handleDrawerOpen}
+          handleDrawerClose={handleDrawerClose}
+        />
       </Box>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3 }}
+        className={`chat-content-area ${open ? "" : "close-menu"}`}
+      >
         <Toolbar />
         {props.children}
       </Box>
