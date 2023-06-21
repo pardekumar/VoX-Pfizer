@@ -1,0 +1,16 @@
+.left-menu {
+  width: 240px;
+  background-color: #202123;
+  height: calc(100vh)
+}
+
+.left-menu .new-chat {
+  color: rgba(255, 255, 255, 1);
+  border: 0 solid #d9d9e3;
+  box-sizing: border-box;
+}
+
+.MuiDrawer-root .MuiPaper-root {
+  visibility: visible !important;
+  overflow-y: unset;
+}
