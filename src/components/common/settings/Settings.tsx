@@ -14,7 +14,8 @@ import { MenuItem, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './settings.css';
 import { makeStyles } from '@mui/styles';
-import { Settings as SettingsIcon, DataUsage as DataUsageIcon } from '@mui/icons-material';
+import { Settings as SettingsIcon, DataUsage as DataUsageIcon,Close as CloseIcon } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
 
 const HorizontalForm = styled('div')({
   display: 'flex',
@@ -94,7 +95,19 @@ const classes = useStyles();
         Open Settings
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Settings</DialogTitle>
+        <DialogTitle>Settings
+        <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
         <Divider style={{ margin: '1em 0' }} />
         <DialogContent>
           <div style={{ display: 'flex' }}>

@@ -44,3 +44,10 @@ button{
     border-radius: 14px;
     line-height: 0.3em;
 }
+.MuiTabs-indicator{
+    background-color: transparent;
+}
+MuiDialog-paper {
+    width: 600px;
+
+}
