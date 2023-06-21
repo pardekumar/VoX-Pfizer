@@ -1,4 +1,5 @@
 :root {
+  --left-menu-header-h: 80px;
   --left-menu-top-section-h: 132px;
   --left-menu-bottom-section-h: 62px;
   --drawer-width: 260px;

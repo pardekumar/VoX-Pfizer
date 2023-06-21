@@ -2,7 +2,7 @@
 .left-menu {
   width: var(--drawer-width);
   background-color: #202123;
-  height: calc(100vh);
+  height: calc(100vh - var(--left-menu-header-h));
   font-family: var(-font-family-list);
   font-size: 14px;
   -webkit-text-size-adjust: 100%;
@@ -55,7 +55,7 @@
 
 
 .left-menu .left-menu-link-section {
-  height: calc(100vh - var(--left-menu-top-section-h) - var(--left-menu-bottom-section-h));
+  height: calc(100vh - var(--left-menu-top-section-h) - var(--left-menu-bottom-section-h) - var(--left-menu-header-h));
   overflow-y: auto;
 }
 .left-menu .left-menu-link-section::-webkit-scrollbar {
@@ -82,7 +82,8 @@
   border-radius: 4px;
   height: 44px;
 }
-.left-menu .list-item.selected .MuiListItemButton-root, .left-menu .list-item.selected:hover .MuiListItemButton-root {
+.left-menu .list-item.selected .MuiListItemButton-root,
+.left-menu .list-item.selected:hover .MuiListItemButton-root {
   background-color: var(--left-menu-col-selected);
 }
 .left-menu .list-item:hover .MuiListItemButton-root {
@@ -98,6 +99,7 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
 .left-menu .list-item .item-menu {
   height: 44px;
   position: absolute;
@@ -116,17 +118,20 @@
 .left-menu .list-item.selected .item-menu {
   width: 100px;
 }
-.left-menu .list-item.selected .item-menu .item-menu-icons {
+.left-menu .list-item.selected .item-menu .item-menu-icons,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icons {
   text-align: right;
   line-height: 44px;
 }
-.left-menu .list-item.selected .item-menu .item-menu-icon {
+.left-menu .list-item.selected .item-menu .item-menu-icon,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icon {
   line-height: 44px;
   display: inline-block;
   padding: 5px;
   color: rgba(186, 186, 199, 1)
 }
-.left-menu .list-item.selected .item-menu .item-menu-icon:hover {
+.left-menu .list-item.selected .item-menu .item-menu-icon:hover,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icon:hover {
   color: rgba(255, 255, 255, 1)
 }
 .left-menu .list-item-text .MuiTypography-root {
@@ -161,4 +166,18 @@
 .left-menu .no-gutter {
   padding: 0px;
   margin: 0px;
+}
+
+
+
+.left-menu .list-item .item-menu-edit {
+  height: 44px;
+  position: absolute;
+  right: 0px;
+  width: 60px;
+  border-radius: 4px;
+}
+.left-menu .list-item .input-field input {
+  color: #fff;
+  font-size: 14px;
 }
