@@ -13,12 +13,37 @@ import Divider from '@mui/material/Divider';
 import { MenuItem, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './settings.css';
+import { makeStyles } from '@mui/styles';
+import { Settings as SettingsIcon, DataUsage as DataUsageIcon } from '@mui/icons-material';
+
 const HorizontalForm = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems:'center'
 });
-
+  const useStyles = makeStyles(() => ({
+    btnNeutral : {
+        backgroundColor:'rgba(255,255,255,1) !important',
+        borderColor:'rgba(0,0,0,.1) !important',
+        borderWidth:'1px',
+        color:'rgba(64,65,79,1) !important',
+        fontSize:'.875rem',
+        lineHeight:'1.25rem',
+        alignItems: 'center',
+        borderRadius:'0.25rem',
+        padding: '0.5rem 0.75rem',
+        height: '3em'
+    },
+  iconTabs:{
+    color: '#1976d2',
+    display: 'flex  !important',
+    flexFlow: 'row  !important',
+    alignItems: 'center  !important'
+    
+  }
+  }));
 function SettingsPopup() {
+const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
@@ -63,7 +88,7 @@ function SettingsPopup() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
+      <Button  variant="outlined" onClick={handleOpen}>
         Open Settings
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -76,8 +101,8 @@ function SettingsPopup() {
               onChange={handleTabChange}
               style={{ marginRight: '16px' }}
             >
-              <Tab label="General" />
-              <Tab label="Data Controls" />
+              <Tab label="General" icon={<SettingsIcon />} className={classes.iconTabs}/>
+              <Tab label="Data Controls"icon={<DataUsageIcon />} className={classes.iconTabs}/>
             </Tabs>
             <FormGroup>
               {activeTab === 0 && (
@@ -94,7 +119,7 @@ function SettingsPopup() {
                       <MenuItem value="light">Light</MenuItem>
                       <MenuItem value="dark">Dark</MenuItem>
                     </TextField>
-                    <Button variant="contained" onClick={handleClearChat}>
+                    <Button  variant="contained" color="error" onClick={handleClearChat}>
                       Clear Chat
                     </Button>
                   </HorizontalForm>
@@ -121,22 +146,22 @@ function SettingsPopup() {
                   </div>
                   <Divider style={{ margin: '16px 0' }} />
                   <HorizontalForm>
-                    <h3>Shared Links</h3>
-                    <Button variant="contained" onClick={handleExportData}>
+                    <div>Shared Links</div>
+                    <Button  variant="outlined"  className={classes.btnNeutral}  onClick={handleExportData}>
                       Manage
                     </Button>
                   </HorizontalForm>
                   <Divider style={{ margin: '16px 0' }} />
                   <HorizontalForm>
-                    <h3>Export Data</h3>
-                    <Button variant="contained" onClick={handleExportData}>
+                    <div>Export Data</div>
+                    <Button  variant="outlined" className={classes.btnNeutral} onClick={handleExportData}>
                       Export
                     </Button>
                   </HorizontalForm>
                   <Divider style={{ margin: '16px 0' }} />
                   <HorizontalForm>
-                    <h3>Delete Account</h3>
-                    <Button variant="contained" onClick={handleDeleteAccount}>
+                    <div>Delete Account</div>
+                    <Button  variant="contained" color="error" onClick={handleDeleteAccount}>
                       Delete
                     </Button>
                   </HorizontalForm>
@@ -146,7 +171,7 @@ function SettingsPopup() {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose}  className={classes.btnNeutral}>
             Save
           </Button>
           <Button onClick={handleClose} color="secondary">

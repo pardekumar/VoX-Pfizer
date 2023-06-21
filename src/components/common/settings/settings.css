@@ -4,7 +4,7 @@
     flex-direction: row-reverse;
 }
 .MuiTabs-root.MuiTabs-vertical.css-1g4ac1o-MuiTabs-root{
-    min-height: 600px;
+    min-height: 300px;
     text-align: left;
 }
 button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
@@ -16,4 +16,31 @@ button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.css-1h9z7r5-MuiBut
 }
 .subText{
     font-size: 12px;
+}
+
+.active{
+    background: rgba(52,53,65,1);
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: white !important;
+    background: rgba(52,53,65,1);
+}
+button{
+    color: rgba(64,65,79,1);
+}
+.btn-neutral {
+    background-color: rgba(255,255,255,1);
+    border-color: rgba(0,0,0,.1);
+    border-width: 1px;
+    color: rgba(64,65,79,1);
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+.Mui-selected {
+    color: white !important;
+    background-color: rgba(64,65,79,1);
+    padding: 0px 1.2em;
+    border-radius: 14px;
+    line-height: 0.3em;
 }
