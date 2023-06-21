@@ -1,0 +1,19 @@
+.right-sideswitch{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.MuiTabs-root.MuiTabs-vertical.css-1g4ac1o-MuiTabs-root{
+    min-height: 600px;
+    text-align: left;
+}
+button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+    align-items: flex-start;
+}
+.MuiFormGroup-root.css-dmmspl-MuiFormGroup-root {
+    display: flex;
+    flex: 1;
+}
+.subText{
+    font-size: 12px;
+}
