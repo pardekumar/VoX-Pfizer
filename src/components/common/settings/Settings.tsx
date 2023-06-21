@@ -35,10 +35,12 @@ const HorizontalForm = styled('div')({
         height: '3em'
     },
   iconTabs:{
-    color: '#1976d2',
+    color: '#000',
     display: 'flex  !important',
     flexFlow: 'row  !important',
-    alignItems: 'center  !important'
+    alignItems: 'center  !important',
+    minHeight: '37px',
+    justifyContent: 'flex-start',
     
   }
   }));
@@ -93,20 +95,21 @@ const classes = useStyles();
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Settings</DialogTitle>
+        <Divider style={{ margin: '1em 0' }} />
         <DialogContent>
           <div style={{ display: 'flex' }}>
             <Tabs
               orientation="vertical"
               value={activeTab}
               onChange={handleTabChange}
-              style={{ marginRight: '16px' }}
+              style={{ marginRight: '1em' }}
             >
               <Tab label="General" icon={<SettingsIcon />} className={classes.iconTabs}/>
               <Tab label="Data Controls"icon={<DataUsageIcon />} className={classes.iconTabs}/>
             </Tabs>
             <FormGroup>
               {activeTab === 0 && (
-                <div>
+                <div style={{ padding: '1em'}}>
                   <HorizontalForm>
                     <TextField
                       select
@@ -134,6 +137,7 @@ const classes = useStyles();
                         <Switch
                           checked={notifications}
                           onChange={handleNotificationsChange}
+                          color="success"
                         />
                       }
                       label="Chat History & Training"
@@ -170,14 +174,6 @@ const classes = useStyles();
             </FormGroup>
           </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}  className={classes.btnNeutral}>
-            Save
-          </Button>
-          <Button onClick={handleClose} color="secondary">
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
