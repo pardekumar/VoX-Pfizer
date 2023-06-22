@@ -18,6 +18,12 @@ import TextField from "@mui/material/TextField";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
+import {
+  useUserChats,
+  useUserChatsDispatch,
+} from "../../UserChatContext/UserChatProvider";
+import utils from "./utils";
+
 import "./Left.css";
 
 export default function Response(props: any) {
@@ -25,46 +31,55 @@ export default function Response(props: any) {
   const [selected, setSelected] = React.useState([-1, -1]);
   const [editmode, setEditmode] = React.useState([-1, -1]);
   const [deletemode, setDeletemode] = React.useState([-1, -1]);
+  const [leftMenuData, setLeftMenuData]: any = React.useState({
+    sections: [],
+  });
+  const userChats = useUserChats();
 
-  const leftMenuData = {
-    sections: [
-      {
-        title: "Yesterday",
-        items: [
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-        ],
-      },
-      {
-        title: "Previous 7 Days",
-        items: [
-          { title: "1Summarize Request: Test." },
-          { title: "2Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-        ],
-      },
-      {
-        title: "Previous 7 Days",
-        items: [
-          { title: "1Summarize Request: Test." },
-          { title: "2Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-          { title: "Summarize Request: Test." },
-          { title: "Quantum Computing Explained" },
-        ],
-      },
-    ],
-  };
+  React.useEffect(() => {
+    setLeftMenuData(utils.formatUserChats(userChats));
+  }, [userChats]);
+
+  console.log({ userChats, leftMenuData });
+  // const leftMenuData = {
+  //   sections: [
+  //     {
+  //       title: "Yesterday",
+  //       items: [
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Previous 7 Days",
+  //       items: [
+  //         { title: "1Summarize Request: Test." },
+  //         { title: "2Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Previous 7 Days",
+  //       items: [
+  //         { title: "1Summarize Request: Test." },
+  //         { title: "2Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //         { title: "Summarize Request: Test." },
+  //         { title: "Quantum Computing Explained" },
+  //       ],
+  //     },
+  //   ],
+  // };
 
   const menuItems = (i: any, ci: any) => {
     return (
@@ -79,10 +94,10 @@ export default function Response(props: any) {
           <svg
             stroke="currentColor"
             fill="none"
-            stroke-width="2"
+            strokeWidth="2"
             viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="h-4 w-4"
             height="1em"
             width="1em"
@@ -93,13 +108,14 @@ export default function Response(props: any) {
           </svg>
         </div>
         <div className="item-menu-icon">
+          {/* share */}
           <svg
             stroke="currentColor"
             fill="none"
-            stroke-width="2"
+            strokeWidth="2"
             viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="h-4 w-4"
             height="1em"
             width="1em"
@@ -116,13 +132,14 @@ export default function Response(props: any) {
             setDeletemode([i, ci]);
           }}
         >
+          {/* delete */}
           <svg
             stroke="currentColor"
             fill="none"
-            stroke-width="2"
+            strokeWidth="2"
             viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="h-4 w-4"
             height="1em"
             width="1em"
@@ -217,10 +234,10 @@ export default function Response(props: any) {
               <svg
                 stroke="currentColor"
                 fill="none"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="h-4 w-4"
                 height="1em"
                 width="1em"
@@ -237,9 +254,10 @@ export default function Response(props: any) {
       <div className="left-menu-link-section">
         <Box>
           <List>
-            {leftMenuData.sections.length &&
-              leftMenuData.sections.map((item, i) => (
-                <>
+            {leftMenuData.sections &&
+              leftMenuData.sections.length &&
+              leftMenuData.sections.map((item: any, i: any) => (
+                <React.Fragment key={`text_${i}`}>
                   <ListItem
                     key={`text_${i}`}
                     disablePadding
@@ -254,7 +272,7 @@ export default function Response(props: any) {
                   </ListItem>
                   {item.items &&
                     item.items.length &&
-                    item.items.map((citem, ci) => (
+                    item.items.map((citem: any, ci: any) => (
                       <ListItem
                         key={`ctext_${ci}`}
                         disablePadding
@@ -272,10 +290,10 @@ export default function Response(props: any) {
                             <svg
                               stroke="currentColor"
                               fill="none"
-                              stroke-width="2"
+                              strokeWidth="2"
                               viewBox="0 0 24 24"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                               className="h-4 w-4"
                               height="1em"
                               width="1em"
@@ -341,7 +359,7 @@ export default function Response(props: any) {
                         </ListItemButton>
                       </ListItem>
                     ))}
-                </>
+                </React.Fragment>
               ))}
           </List>
         </Box>

@@ -1,11 +1,14 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, type Dispatch } from "react";
 
 const UserChatContext = createContext(null);
 
 const UserChatDispatchContext = createContext(null);
 
-export function UserChatProvider({ children }) {
-  const [userChats, dispatch] = useReducer(userChatsReducer, initialUserChats);
+export function UserChatProvider({ children }: any) {
+  const [userChats, dispatch]: any = useReducer(
+    userChatsReducer,
+    initialUserChats
+  );
 
   return (
     <UserChatContext.Provider value={userChats}>
@@ -24,11 +27,11 @@ export function useUserChatsDispatch() {
   return useContext(UserChatDispatchContext);
 }
 
-function userChatsReducer(userChats, action) {
+function userChatsReducer(userChats: any, action: any) {
   switch (action.type) {
     case "add_initial_load": {
       const data = [...userChats];
-      action.payload.data.forEach((item) =>
+      action.payload.data.forEach((item: any) =>
         data.push({
           session_id: item.session_id,
           title: "", // as of now we have to show title of first user type message
@@ -56,10 +59,10 @@ function userChatsReducer(userChats, action) {
       ];
     }
     case "add_chat_history": {
-      return userChats.map((session) => {
+      return userChats.map((session: any) => {
         if (session.session_id === action.session_id) {
           const messages = [...session.messages];
-          action.payload.data.forEach((item) =>
+          action.payload.data.forEach((item: any) =>
             messages.push({
               msg_id: item.msg_id,
               usr_session_id: item.usr_session_id,
@@ -78,10 +81,11 @@ function userChatsReducer(userChats, action) {
       });
     }
     case "update_session": {
-      return userChats.map((session) => {
+      return userChats.map((session: any) => {
         if (session.session_id === action.session_id) {
           return {
             ...session,
+            title: action.title,
             temp: action.temp,
             engine: action.engine,
             max_tokens: action.max_tokens,
@@ -92,7 +96,7 @@ function userChatsReducer(userChats, action) {
       });
     }
     case "add_user_message": {
-      return userChats.map((session) => {
+      return userChats.map((session: any) => {
         if (session.session_id === action.session_id) {
           const messages = [...session.messages];
           const newMes = action.payload.message;
@@ -113,11 +117,11 @@ function userChatsReducer(userChats, action) {
       });
     }
     case "like": {
-      return userChats.map((session) => {
+      return userChats.map((session: any) => {
         if (session.session_id === action.session_id) {
           return {
             ...session,
-            messages: session.messages.map((message) => {
+            messages: session.messages.map((message: any) => {
               if (message.msg_id === action.payload.msg_id) {
                 return { ...message, like: action.like };
               } else {
@@ -159,9 +163,8 @@ const initialUserChats = [
         msg: "sample system prompt",
         msg_seq_num: 2,
         created_ts: "2023-06-12T14:56:29",
-        like: 1,
         parent_msg_id: 651830,
-        like: null, // null by default
+        like: 1,
       },
     ],
   },
