@@ -4,16 +4,17 @@ import "./App.css";
 
 import Header from "./components/common/Header";
 import Response from "./components/Response";
-import SettingsPopup from "./components/common/settings/Settings";
+import { UserChatProvider } from "./UserChatContext/UserChatProvider";
 
 function App() {
   return (
-    <div className="App">
-      <Header>
-        <Response />
-        <SettingsPopup />
-      </Header>
-    </div>
+    <UserChatProvider>
+      <div className="App">
+        <Header>
+          <Response />
+        </Header>
+      </div>
+    </UserChatProvider>
   );
 }
 

@@ -1,16 +1,183 @@
+
 .left-menu {
-  width: 240px;
+  width: var(--drawer-width);
   background-color: #202123;
-  height: calc(100vh)
+  height: calc(100vh - var(--left-menu-header-h));
+  font-family: var(-font-family-list);
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%;
+  transition: all var(--transition-time) var(--transition-effect);
+}
+/* .left-menu.close-menu {
+  transform: translateX(var(--drawer-width-neg));
+} */
+.left-menu.close-menu .menu-button.minimizer {
+  transform: translateX(-199px);
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 1);
 }
 
-.left-menu .new-chat {
+.left-menu .menu-button {
   color: rgba(255, 255, 255, 1);
-  border: 0 solid #d9d9e3;
+  border: 1px solid hsla(0,0%,100%,.2);
   box-sizing: border-box;
+  background-color: #202123;
+  text-transform: inherit;
+  text-align: left;
+  justify-content: start;
+  height: 44px;
+  margin: 10px;
+}
+.left-menu .menu-button:hover {
+  background-color: #1F1F1F;
 }
 
-.MuiDrawer-root .MuiPaper-root {
-  visibility: visible !important;
-  overflow-y: unset;
+.left-menu .menu-button.new-chat {
+  width: 192px;
+}
+.left-menu .menu-button.minimizer {
+  width: 44px;
+  min-width: 44px;
+  padding-top: 11px;
+  justify-content: center;
+  line-height: 44px;
+  position: absolute;
+  left: 199px;
+  transition: all var(--transition-time) var(--transition-effect);
+  z-index: 2;
+}
+.left-menu .h-4 {
+  height: 1rem;
+}
+.left-menu .w-4 {
+  width: 1rem;
+}
+
+
+.left-menu .left-menu-link-section {
+  height: calc(100vh - var(--left-menu-top-section-h) - var(--left-menu-bottom-section-h) - var(--left-menu-header-h));
+  overflow-y: auto;
+}
+.left-menu .left-menu-link-section::-webkit-scrollbar {
+  display: none;
+}
+
+/* list style */
+.left-menu .list-heading {
+  padding: 0px 10px;
+  line-height: 36px;
+  text-align: left;
+  font-size: 12px;
+  color: rgb(142, 142, 160);
+}
+.left-menu .list-heading .list-item-text {
+  padding: 0px;
+}
+.left-menu .list-item {
+  padding: 0px 10px;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+}
+.left-menu .list-item .MuiListItemButton-root {
+  border-radius: 4px;
+  height: 44px;
+}
+.left-menu .list-item.selected .MuiListItemButton-root,
+.left-menu .list-item.selected:hover .MuiListItemButton-root {
+  background-color: var(--left-menu-col-selected);
+}
+.left-menu .list-item:hover .MuiListItemButton-root {
+  background-color: var(--left-menu-col-hover);
+}
+.left-menu .icons {
+  min-width: unset;
+  color: rgb(255, 255, 255);
+  padding-left: 10px !important;
+}
+.left-menu .list-item-text {
+  padding: 0px 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.left-menu .list-item .item-menu {
+  height: 44px;
+  position: absolute;
+  right: 0px;
+  width: 60px;
+  border-radius: 4px;
+  background-image: linear-gradient(to left, var(--left-menu-col), rgba(32, 33, 35, 0));
+}
+.left-menu .list-item:hover .item-menu {
+  background-image: linear-gradient(to left, var(--left-menu-col-hover), rgba(42, 43, 50, 0));
+}
+.left-menu .list-item.selected .item-menu {
+  /* background-image: linear-gradient(to left, var(--left-menu-col-selected), rgba(52, 53, 65, 0)); */
+  background-image: linear-gradient(to left, var(--left-menu-col-selected), var(--left-menu-col-selected), var(--left-menu-col-selected), var(--left-menu-col-selected), rgba(52, 53, 65, 0))
+}
+.left-menu .list-item.selected .item-menu {
+  width: 100px;
+}
+.left-menu .list-item.selected .item-menu .item-menu-icons,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icons {
+  text-align: right;
+  line-height: 44px;
+}
+.left-menu .list-item.selected .item-menu .item-menu-icon,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icon {
+  line-height: 44px;
+  display: inline-block;
+  padding: 5px;
+  color: rgba(186, 186, 199, 1)
+}
+.left-menu .list-item.selected .item-menu .item-menu-icon:hover,
+.left-menu .list-item.selected .item-menu-edit .item-menu-icon:hover {
+  color: rgba(255, 255, 255, 1)
+}
+.left-menu .list-item-text .MuiTypography-root {
+  font-size: 14px;
+}
+.left-menu .list-item .item-menu.bottom {
+  background-image: linear-gradient(to left, var(--left-menu-col), var(--left-menu-col), rgba(32, 33, 35, 0));
+}
+.left-menu .list-item:hover .item-menu.bottom {
+  background-image: linear-gradient(to left, var(--left-menu-col-hover),var(--left-menu-col-hover), rgba(42, 43, 50, 0));
+}
+.left-menu .list-item .item-menu .item-menu-button {
+  padding-right: 10px;
+  text-align: right;
+  height: 44px;
+  line-height: 44px;
+}
+/* list style */
+
+.left-menu .left-menu-avatar {
+  width: 20px;
+  height: 20px;
+  margin: 12px 12px 10px 0px;
+  background-color: #33495D;
+  color: #fff;
+  font-size: 10px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.left-menu .no-gutter {
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+.left-menu .list-item .item-menu-edit {
+  height: 44px;
+  position: absolute;
+  right: 0px;
+  width: 60px;
+  border-radius: 4px;
+}
+.left-menu .list-item .input-field input {
+  color: #fff;
+  font-size: 14px;
 }

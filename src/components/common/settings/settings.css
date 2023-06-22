@@ -47,7 +47,7 @@ button{
 .MuiTabs-indicator{
     background-color: transparent;
 }
-MuiDialog-paper {
+.MuiDialog-paper {
     width: 600px;
 
 }

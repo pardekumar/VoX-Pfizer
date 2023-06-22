@@ -1,0 +1,27 @@
+:root {
+  --left-menu-header-h: 80px;
+  --left-menu-top-section-h: 132px;
+  --left-menu-bottom-section-h: 62px;
+  --drawer-width: 260px;
+  --drawer-width-neg: -260px;
+  --transition-time: 150ms;
+  --transition-effect: ease-in;
+  --font-family-list: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  --left-menu-col: rgb(32, 33, 35);
+  --left-menu-col-hover: rgb(42, 43, 50);
+  --left-menu-col-selected: rgb(52, 53, 65);
+}
+
+.chat-content-area {
+  position: absolute;
+  width: calc(100vw - var(--drawer-width));
+  left: var(--drawer-width);
+  transition: all var(--transition-time) var(--transition-effect);
+  z-index: 1;
+  height: 100vh;
+  background-color: #fff;
+}
+.chat-content-area.close-menu {
+  width: calc(100vw);
+  left: 0px;
+}

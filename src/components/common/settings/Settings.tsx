@@ -22,6 +22,10 @@ const HorizontalForm = styled('div')({
   justifyContent: 'space-between',
   alignItems:'center'
 });
+interface SettingsPopupProps {
+  open: boolean;
+  handleClose: () => void;
+}
   const useStyles = makeStyles(() => ({
     btnNeutral : {
         backgroundColor:'rgba(255,255,255,1) !important',
@@ -45,21 +49,13 @@ const HorizontalForm = styled('div')({
     
   }
   }));
-function SettingsPopup() {
+function SettingsPopup({ open, handleClose }:SettingsPopupProps) {
 const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedTheme, setSelectedTheme] = useState('');
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setActiveTab(newValue);
@@ -91,9 +87,6 @@ const classes = useStyles();
 
   return (
     <div>
-      <Button  variant="outlined" onClick={handleOpen}>
-        Open Settings
-      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Settings
         <IconButton
