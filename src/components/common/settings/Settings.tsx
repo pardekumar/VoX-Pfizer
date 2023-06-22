@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
+import { Close as CloseIcon, DataUsage as DataUsageIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import DialogTitle from '@mui/material/DialogTitle';
 import Divider from '@mui/material/Divider';
-import { MenuItem, TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import './settings.css';
-import { makeStyles } from '@mui/styles';
-import { Settings as SettingsIcon, DataUsage as DataUsageIcon,Close as CloseIcon } from '@mui/icons-material';
+import FormGroup from '@mui/material/FormGroup';
 import IconButton from '@mui/material/IconButton';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { styled } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
+import React, { useState } from 'react';
+import DataControls from './DataControls';
+import General from './General';
+import './settings.css';
 
 const HorizontalForm = styled('div')({
   display: 'flex',
@@ -52,7 +49,7 @@ interface SettingsPopupProps {
 function SettingsPopup({ open, handleClose }:SettingsPopupProps) {
 const classes = useStyles();
   // const [open, setOpen] = useState(false);
-  const [notifications, setNotifications] = useState(true);
+  const  [notifications,setNotifications]= useState(false)
   const [darkMode, setDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedTheme, setSelectedTheme] = useState('');
@@ -62,7 +59,7 @@ const classes = useStyles();
   };
 
   const handleNotificationsChange = () => {
-    setNotifications(!notifications);
+     setNotifications(!notifications);
   };
 
   const handleDarkModeChange = () => {
@@ -111,72 +108,15 @@ const classes = useStyles();
               style={{ marginRight: '1em' }}
             >
               <Tab label="General" icon={<SettingsIcon />} className={classes.iconTabs}/>
-              <Tab label="Data Controls"icon={<DataUsageIcon />} className={classes.iconTabs}/>
+              {/* <Tab label="Data Controls"icon={<DataUsageIcon />} className={classes.iconTabs}/> */}
             </Tabs>
             <FormGroup>
               {activeTab === 0 && (
-                <div style={{ padding: '1em'}}>
-                  <HorizontalForm>
-                    <TextField
-                      select
-                      label="Theme"
-                      value={selectedTheme}
-                      onChange={handleThemeChange}
-                      style={{ marginRight: '16px', width: '150px' }}
-                    >
-                      <MenuItem value="system">System</MenuItem>
-                      <MenuItem value="light">Light</MenuItem>
-                      <MenuItem value="dark">Dark</MenuItem>
-                    </TextField>
-                    <Button  variant="contained" color="error" onClick={handleClearChat}>
-                      Clear Chat
-                    </Button>
-                  </HorizontalForm>
-                </div>
+                <General selectedTheme={selectedTheme} themeChange={handleThemeChange} ClearChat={handleClearChat}></General>
               )}
-              {activeTab === 1 && (
-                <div>
-                  <div>
-                    <FormControlLabel
-                    className="right-sideswitch"
-                      control={
-                        <Switch
-                          checked={notifications}
-                          onChange={handleNotificationsChange}
-                          color="success"
-                        />
-                      }
-                      label="Chat History & Training"
-                    />
-                    <p className="subText">
-                      Save new chats on this browser to your history and allow them to be used to improve our models.
-                      Unsaved chats will be deleted from our systems within 30 days. This setting does not sync across
-                      browsers or devices.
-                    </p>
-                  </div>
-                  <Divider style={{ margin: '16px 0' }} />
-                  <HorizontalForm>
-                    <div>Shared Links</div>
-                    <Button  variant="outlined"  className={classes.btnNeutral}  onClick={handleExportData}>
-                      Manage
-                    </Button>
-                  </HorizontalForm>
-                  <Divider style={{ margin: '16px 0' }} />
-                  <HorizontalForm>
-                    <div>Export Data</div>
-                    <Button  variant="outlined" className={classes.btnNeutral} onClick={handleExportData}>
-                      Export
-                    </Button>
-                  </HorizontalForm>
-                  <Divider style={{ margin: '16px 0' }} />
-                  <HorizontalForm>
-                    <div>Delete Account</div>
-                    <Button  variant="contained" color="error" onClick={handleDeleteAccount}>
-                      Delete
-                    </Button>
-                  </HorizontalForm>
-                </div>
-              )}
+              {/* {activeTab === 1 && (
+                <DataControls notifications={notifications} NotificationsChange={handleNotificationsChange} ExportData={handleExportData} DeleteAccount={handleDeleteAccount} ClearChat={handleClearChat}></DataControls>
+              )} */}
             </FormGroup>
           </div>
         </DialogContent>
