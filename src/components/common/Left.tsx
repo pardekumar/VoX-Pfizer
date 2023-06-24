@@ -25,6 +25,7 @@ import {
 import utils from "./utils";
 
 import "./Left.css";
+import SettingsPopup from "./settings/Settings";
 
 export default function Response(props: any) {
   const { open, handleDrawerOpen, handleDrawerClose } = props;
@@ -34,6 +35,7 @@ export default function Response(props: any) {
   const [leftMenuData, setLeftMenuData]: any = React.useState({
     sections: [],
   });
+  const [opensettings,setopenSettings] = React.useState(false);
   const userChats = useUserChats();
 
   React.useEffect(() => {
@@ -41,46 +43,6 @@ export default function Response(props: any) {
   }, [userChats]);
 
   console.log({ userChats, leftMenuData });
-  // const leftMenuData = {
-  //   sections: [
-  //     {
-  //       title: "Yesterday",
-  //       items: [
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //       ],
-  //     },
-  //     {
-  //       title: "Previous 7 Days",
-  //       items: [
-  //         { title: "1Summarize Request: Test." },
-  //         { title: "2Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //       ],
-  //     },
-  //     {
-  //       title: "Previous 7 Days",
-  //       items: [
-  //         { title: "1Summarize Request: Test." },
-  //         { title: "2Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //         { title: "Summarize Request: Test." },
-  //         { title: "Quantum Computing Explained" },
-  //       ],
-  //     },
-  //   ],
-  // };
-
   const menuItems = (i: any, ci: any) => {
     return (
       <div className="item-menu-icons">
@@ -202,6 +164,13 @@ export default function Response(props: any) {
     );
   };
 
+  const handleOpenSettings = () => {
+    setopenSettings(true);
+  };
+
+  const handleCloseSettings = () => {
+    setopenSettings(false);
+  };
   return (
     <div className={`left-menu ${open ? "" : "close-menu"}`}>
       <div className="left-menu-top-section">
@@ -377,11 +346,12 @@ export default function Response(props: any) {
               className="list-item-text"
             />
             <div className="item-menu bottom">
-              <div className="item-menu-button">...</div>
+              <div className="item-menu-button" onClick={handleOpenSettings}>...</div>
             </div>
           </ListItemButton>
         </ListItem>
       </List>
+      <SettingsPopup open={opensettings} handleClose={handleCloseSettings}></SettingsPopup>
     </div>
   );
 }
