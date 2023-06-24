@@ -1,87 +1,128 @@
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { styled } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
-import './settings.css';
-interface DataControlProps{
-  notifications:boolean;
-  NotificationsChange:() => void;
-  ExportData:() => void;
-  DeleteAccount:() => void;
-  ClearChat:() => void;
+import React, { useEffect } from "react";
+import "./settings.scss";
+import SliderComp from "../../widgets/Slider";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+interface DataControlProps {
+  title: string;
+  maxToken: number;
+  engineList: string[];
+  selEngine: string;
+  temperature: number;
+  selTheme: string;
+  handleSliderUpdate: (fieldName: string, value: number | string) => void;
 }
-const useStyles = makeStyles(() => ({
-    btnNeutral : {
-        backgroundColor:'rgba(255,255,255,1) !important',
-        borderColor:'rgba(0,0,0,.1) !important',
-        borderWidth:'1px',
-        color:'rgba(64,65,79,1) !important',
-        fontSize:'.875rem',
-        lineHeight:'1.25rem',
-        alignItems: 'center',
-        borderRadius:'0.25rem',
-        padding: '0.5rem 0.75rem',
-        height: '3em'
-    },
-  iconTabs:{
-    color: '#000',
-    display: 'flex  !important',
-    flexFlow: 'row  !important',
-    alignItems: 'center  !important',
-    minHeight: '37px',
-    justifyContent: 'flex-start',
+
+function DataControls({
+  title,
+  maxToken,
+  engineList,
+  selEngine,
+  temperature,
+  selTheme,
+  handleSliderUpdate,
+}: DataControlProps) {
+  const [formTitle, setTitle] = React.useState(title);
+  const [formMaxToken, setMaxToken] = React.useState(maxToken);
+  const [formEngine, setEngine] = React.useState(selEngine);
+  const [formTemperature, setTemperature] = React.useState(temperature);
+  const handleUpdate = (fieldName: string, value: number) => {
+    handleSliderUpdate(fieldName, value);
+  };
+  const engineDropdownListener = (event: any) => {
+    setEngine(event.target.value);
+    handleSliderUpdate("engine", event.target.value);
+  };
+  const titleListener = (event: any) => {
+    setTitle(event.target.value);
+    handleSliderUpdate("title", event.target.value);
     
-  }
-  }));
-  const HorizontalForm = styled('div')({
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems:'center'
-  });
-function DataControls({notifications,NotificationsChange,ExportData,DeleteAccount,ClearChat}:DataControlProps){
-    const classes = useStyles();
-    return (<div>
-        <div>
-          <FormControlLabel
-          className="right-sideswitch"
-            control={
-              <Switch
-                checked={notifications}
-                onChange={NotificationsChange}
-                color="success"
-              />
-            }
-            label="Chat History & Training"
-          />
-          <p className="subText">
-            Save new chats on this browser to your history and allow them to be used to improve our models.
-            Unsaved chats will be deleted from our systems within 30 days. This setting does not sync across
-            browsers or devices.
-          </p>
+  };
+
+  useEffect(() => {
+    setTitle(title);
+    setMaxToken(maxToken);
+    setEngine(selEngine);
+    setTemperature(temperature);
+  }, [title, maxToken, selEngine, temperature]);
+  return (
+    <div>
+      <div className="">
+        <div className="text-sm">
+          <div className="d-flex  justify-content-between flex-fill">
+            <div style={{ marginTop: "5px" }}>Title</div>
+            <TextField
+              id="standard-basic"
+              placeholder="Enter Title"
+              variant="standard"
+              value={formTitle}
+              onChange={(event: any) => titleListener(event)}
+            />
+          </div>
+          <Divider  className="divider"  />
+          <div className="d-flex  justify-content-between">
+            <div className="mt-2 w-50">Temperature</div>
+            <div className="p-2 w-100">
+              <SliderComp
+                key={1}
+                disabled={false}
+                marks={[{ value: 1, label: 1 }]}
+                step={0.1}
+                value={[formTemperature]}
+                min={0}
+                max={1}
+                updateSliderValue={(value: any) =>
+                  handleUpdate("temperature", value)
+                }
+              ></SliderComp>
+            </div>
+          </div>
+          <Divider className="divider" />
+          <div className="d-flex  justify-content-between flex-fill">
+            <div className="mt-2 w-50">Max Tokens</div>
+            <div className="p-2 w-100">
+              <SliderComp
+                key={1}
+                disabled={false}
+                step={1}
+                marks={[{ value: 1024, label: 1024 }]}
+                value={[formMaxToken]}
+                min={1}
+                max={4096}
+                updateSliderValue={(value: any) =>
+                  handleUpdate("max-token", value)
+                }
+              ></SliderComp>
+            </div>
+          </div>
+          <Divider className="divider"  />
+          <div className="d-flex  justify-content-between">
+            <div className="mt-2 w-50">Engine</div>
+            <div className="mt-2">
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }}>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={formEngine}
+                  className="text-sm"
+                  onChange={(event: any) => engineDropdownListener(event)}
+                  disableUnderline
+                >
+                  {engineList.map((engineData) => (
+                    <MenuItem value={engineData}  className={`text-sm ${selTheme}`} >
+                      {engineData}
+                  </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          </div>
         </div>
-        <Divider style={{ margin: '16px 0' }} />
-        <HorizontalForm>
-          <div>Shared Links</div>
-          <Button  variant="outlined"  className={classes.btnNeutral}  onClick={ExportData}>
-            Manage
-          </Button>
-        </HorizontalForm>
-        <Divider style={{ margin: '16px 0' }} />
-        <HorizontalForm>
-          <div>Export Data</div>
-          <Button  variant="outlined" className={classes.btnNeutral} onClick={ExportData}>
-            Export
-          </Button>
-        </HorizontalForm>
-        <Divider style={{ margin: '16px 0' }} />
-        <HorizontalForm>
-          <div>Delete Account</div>
-          <Button  variant="contained" color="error" onClick={DeleteAccount}>
-            Delete
-          </Button>
-        </HorizontalForm>
-      </div>)
+      </div>
+    </div>
+  );
 }
 export default DataControls;

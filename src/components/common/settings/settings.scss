@@ -1,0 +1,137 @@
+
+.active{
+    background: rgba(52,53,65,1);
+}
+
+.MuiTabs-indicator{
+    background-color: transparent;
+}
+.MuiDialog-paper {
+    width: 650px;
+    max-width: 650px;
+}
+
+.MuiTab-root{
+    color: #000 !important;
+    -webkit-align-items: start !important;
+    min-height: 30px !important;
+    text-transform: none !important;
+}
+
+.pull-right{
+    float:right;
+}
+
+.MuiTabs-indicator{
+    background-color: #fff !important;
+}
+
+.text-sm{
+    font-size: .875rem !important;
+    line-height: 1.25rem !important;
+}
+
+.MuiFormControl-root{
+    margin: 0px !important;
+}
+
+
+
+
+.MuiTabs-vertical{
+    border-right: 0px !important;
+}
+
+
+
+.MuiSlider-markLabel, .MuiSlider-marked{
+    font-size: 10px !important;
+}
+ ul{
+    padding-top: 0px !important; 
+     padding-bottom: 0px !important;
+ }
+
+.Light, .System {
+    .MuiPaper-root {
+        background-color: #fff;
+        color: rgba(0, 0, 0, 0.87);
+    }
+    button.Mui-selected {
+        color: white !important;
+        background-color: rgba(64,65,79,1) !important;
+        padding: 0px 1.2em;
+        border-radius: 8px  !important;
+        line-height: 0.3em;
+        -webkit-align-items: start !important;
+    }
+    .MuiFormControl-root:hover{
+        background: #eee;
+        border-radius: 5px;
+    }
+    .divider{
+        border: 0 solid #000 ;
+        border-bottom-width: 1px !important;
+    }
+    
+    .MuiDivider-root{
+        border-color: #000 !important;
+    }
+    .MuiSlider-markLabel, .MuiSlider-marked{
+        color:#000;
+    }
+}
+
+.Dark{
+    .MuiPaper-root, .MuiDialogContent-root > .MuiBox-root, .MuiPaper-root, .MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+        background-color:rgba(0, 0, 0, 0.87) !important;
+        color: #fff;
+    }
+    svg{
+        color: #fff;
+    }
+    div {
+        color: white !important;
+    }
+    button.Mui-selected {
+        color: white !important;
+        background-color: rgba(64,65,79,1) !important;
+        padding: 0px 1.2em;
+        border-radius: 8px  !important;
+        line-height: 0.3em;
+        -webkit-align-items: start !important;
+    }
+    .MuiFormControl-root:hover{
+        background: rgba(64,65,79,1);
+        border-radius: 5px;
+    }
+
+    .divider{
+        border: 0 solid #fff ;
+        border-bottom-width: 1px !important;
+    }
+    
+    .MuiDivider-root{
+        border-color: #fff !important;
+    }
+    .MuiSlider-markLabel, .MuiSlider-marked{
+        color:#fff;
+    }
+
+   
+}
+
+.MuiMenu-paper > ul > li.Dark {
+    background-color:#000  !important;
+    color: #fff;
+    &:hover{
+        background-color: rgba(64,65,79,1) !important;
+    }
+  
+  }
+  .MuiMenu-paper > ul > li.Light {
+    background-color: #fff !important;
+    color: #000;
+  }
+
+

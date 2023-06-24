@@ -1,87 +1,58 @@
-import { MenuItem, TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
-import './settings.css';
-import StepSlider from '../../widgets/StepSlider';
-import Temperature from '../../widgets/Temperature';
-
-
-interface GeneralProps{
-    selectedTheme:string;
-    themeChange:any;
-    ClearChat:()=>void;
+import React, { useState, useEffect } from "react";
+import "./settings.scss";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+interface GeneralProps {
+  selTheme: string;
+  themeList: string[];
+  clearChat: () => void;
+  handleThemeChange: (theme: string) => void;
 }
-const useStyles = makeStyles(() => ({
-    btnNeutral : {
-        backgroundColor:'rgba(255,255,255,1) !important',
-        borderColor:'rgba(0,0,0,.1) !important',
-        borderWidth:'1px',
-        color:'rgba(64,65,79,1) !important',
-        fontSize:'.875rem',
-        lineHeight:'1.25rem',
-        alignItems: 'center',
-        borderRadius:'0.25rem',
-        padding: '0.5rem 0.75rem',
-        height: '3em'
-    },
-  iconTabs:{
-    color: '#000',
-    display: 'flex  !important',
-    flexFlow: 'row  !important',
-    alignItems: 'center  !important',
-    minHeight: '37px',
-    justifyContent: 'flex-start',
-    
-  }
-  }));
-  const HorizontalForm = styled('div')({
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems:'center'
-  });
-  
-function General({selectedTheme,themeChange,ClearChat}:GeneralProps){
-    return (<div style={{ padding: '1em'}}>
-    <HorizontalForm>
-      <TextField
-        select
-        label="Theme"
-        value={selectedTheme}
-        onChange={themeChange}
-        style={{ marginRight: '16px', width: '150px' }}
-      >
-        <MenuItem value="system">System</MenuItem>
-        <MenuItem value="light">Light</MenuItem>
-        <MenuItem value="dark">Dark</MenuItem>
-      </TextField>
 
-      <Button  variant="contained" color="error" onClick={ClearChat}>
-        Clear Chat
-      </Button>
-    </HorizontalForm>
-     <HorizontalForm>
-        <span>Max Token</span>
-        <StepSlider></StepSlider>
-    </HorizontalForm>
-    <HorizontalForm>
-    <span>Engine</span>
-      <TextField
-        select
-        label="Engine"
-        value={selectedTheme}
-        onChange={themeChange}
-        style={{ marginRight: '16px', width: '150px' }}
-      >
-        <MenuItem value="system">System</MenuItem>
-        <MenuItem value="light">Light</MenuItem>
-        <MenuItem value="dark">Dark</MenuItem>
-      </TextField>
-    </HorizontalForm>
-    <HorizontalForm>
-      <span>Temperature</span>
-      <Temperature></Temperature>
-    </HorizontalForm>
-  </div>)
+function General({ selTheme, themeList, clearChat, handleThemeChange }: GeneralProps) {
+  const [theme, setTheme] = React.useState("");
+  useEffect(() => { setTheme(selTheme) }, [selTheme, themeList]);
+
+  const themeChangeListener= (event: any) => {
+    handleThemeChange(event.target.value);
+  }
+  return (
+    <div>
+      <div className="">
+        <div className="text-sm">
+          <div className="d-flex  justify-content-between">
+            <div style={{ marginTop: "5px" }}>Theme</div>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }} >
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={theme}
+                className="text-sm"
+                disableUnderline
+                onChange={themeChangeListener}
+              >
+                  {themeList.map((themeData) => (
+                    <MenuItem value={themeData} className={`text-sm ${selTheme}`} >
+                      {themeData}
+                  </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </div>
+          <Divider  className="divider mt-2"  />
+          <div className="d-flex  justify-content-between mt-2">
+            <div style={{ marginTop: "5px" }}>Clear All Chats</div>
+
+            <Button variant="contained" color="error" onClick={clearChat}>
+              Clear
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 export default General;
